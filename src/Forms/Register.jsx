@@ -4,6 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../FormsStyles/Register.css";
 import { Link } from "react-router-dom";
+import backendApi from "../BackendServerApi";
 
 const Register = ({ onSwitchAuthStep }) => {
   const [firstName, setFirstName] = useState("");
@@ -16,7 +17,7 @@ const Register = ({ onSwitchAuthStep }) => {
 
     try {
       // Make API request to register
-      const response = await axios.post("http://localhost:4000/register", {
+      const response = await axios.post(`${backendApi}/register`, {
         firstName,
         lastName,
         email,

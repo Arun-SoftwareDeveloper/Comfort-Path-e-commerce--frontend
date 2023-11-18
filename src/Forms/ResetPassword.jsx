@@ -1,6 +1,7 @@
 // ResetPasswordForm.jsx
 import React, { useState } from "react";
 import axios from "axios";
+import backendApi from "../BackendServerApi";
 
 const ResetPassword = ({ onSwitchAuthStep, resetToken }) => {
   const [password, setPassword] = useState("");
@@ -10,13 +11,10 @@ const ResetPassword = ({ onSwitchAuthStep, resetToken }) => {
 
     try {
       // Make API request to reset password
-      const response = await axios.post(
-        "http://localhost:4000/api/resetPassword",
-        {
-          token: resetToken,
-          password,
-        }
-      );
+      const response = await axios.post(`${backendApi}/resetPassword`, {
+        token: resetToken,
+        password,
+      });
 
       // Handle success, e.g., display success message
       console.log("Password reset successful");

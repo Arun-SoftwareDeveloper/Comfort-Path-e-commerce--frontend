@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import backendApi from "../BackendServerApi";
 
 const ForgotPassword = ({ onSwitchAuthStep }) => {
   const [email, setEmail] = useState("");
@@ -13,12 +14,9 @@ const ForgotPassword = ({ onSwitchAuthStep }) => {
 
     try {
       // Make API request to initiate password reset
-      const response = await axios.post(
-        "http://localhost:4000/api/forgotPassword",
-        {
-          email,
-        }
-      );
+      const response = await axios.post(`${backendApi}/forgotPassword`, {
+        email,
+      });
 
       // Handle success, e.g., display success message
       toast.success("Password reset email sent", { position: "top-right" });

@@ -4,7 +4,6 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import backendApi from "../BackendServerApi";
-import "../FormsStyles/ResetPassword.css";
 
 const ResetPassword = ({ onSwitchAuthStep, resetToken }) => {
   const [password, setPassword] = useState("");

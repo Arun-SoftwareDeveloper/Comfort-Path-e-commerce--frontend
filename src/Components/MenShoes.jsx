@@ -6,6 +6,8 @@ import menProducts from "../Products/MenProducts";
 import FooterContainer from "./FooterContainer";
 import { Navbar } from "react-bootstrap";
 import NavigationBar from "../Components/NavBar";
+import "../Styles/MenShoes.css";
+import CategoriesBar from "./CategoriesBar";
 
 const MenShoes = ({ handleAddToCart }) => {
   const [products, setProducts] = useState(menProducts);
@@ -93,7 +95,7 @@ const MenShoes = ({ handleAddToCart }) => {
                 Add to Cart
               </button>
             </Link>
-            <button
+            {/* <button
               className={`btn btn-${
                 product.isInWishlist ? "danger" : "outline-secondary"
               }`}
@@ -109,7 +111,7 @@ const MenShoes = ({ handleAddToCart }) => {
                   View Men's Shoes
                 </button>
               </Link>
-            )}
+            )} */}
           </div>
         </div>
       </div>
@@ -143,11 +145,13 @@ const MenShoes = ({ handleAddToCart }) => {
   return (
     <div className="container mt-4">
       {/* <NavigationBar /> */}
+
       <h1>Welcome to Comfort Path</h1>
       <p>
         Explore our wide range of products and enjoy a comfortable shopping
         experience.
       </p>
+      <CategoriesBar />
 
       {/* SearchBar */}
       <SearchBar onSearch={filterProducts} />

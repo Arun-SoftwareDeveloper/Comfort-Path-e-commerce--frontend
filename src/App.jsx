@@ -11,6 +11,7 @@ import NavBar from "./Components/NavBar";
 import AboutContainer from "./Components/AboutContainer";
 import MainContainerCourosel from "./Components/MainContainerCourosel";
 import MenShoes from "./Components/MenShoes";
+import WomenShoesPage from "./Components/WomenShoes";
 import AddToCart from "./Components/AddToCart";
 import WishList from "./Components/WishList";
 import Login from "./Forms/Login";
@@ -109,6 +110,17 @@ function App({ handleToggleWishlist }) {
           <Route
             path="/wishList"
             element={<WishList handleToggleWishlist={handleToggleWishlist} />}
+          />
+          <Route
+            path="/womenShoes"
+            element={
+              <WomenShoesPage
+                setCart={setCart}
+                handleAddToCart={handleAddToCart}
+                handleToggleWishlist={handleToggleWishlist}
+                token={token}
+              />
+            }
           />
         </Routes>
       </Router>

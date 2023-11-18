@@ -1,6 +1,9 @@
 // ForgotPasswordForm.jsx
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ForgotPassword = ({ onSwitchAuthStep }) => {
   const [email, setEmail] = useState("");
@@ -18,24 +21,42 @@ const ForgotPassword = ({ onSwitchAuthStep }) => {
       );
 
       // Handle success, e.g., display success message
-      console.log("Password reset email sent");
+      toast.success("Password reset email sent", { position: "top-right" });
     } catch (error) {
       // Handle error, e.g., display error message
+      toast.error("Error initiating password reset. Please try again.", {
+        position: "top-right",
+      });
       console.error("Error initiating password reset:", error);
     }
   };
 
   return (
-    <form className="auth-form">
-      {/* ... (other form fields) */}
-      <button type="submit" onClick={handleForgotPassword}>
-        Reset Password
-      </button>
-      <p>
-        Remember your password?{" "}
-        <span onClick={() => onSwitchAuthStep("login")}>Login</span>
-      </p>
-    </form>
+    <div className="auth-container">
+      <form className="auth-form">
+        <label>
+          Email:
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
+        <button type="submit" onClick={handleForgotPassword}>
+          Reset Password
+        </button>
+        <p>
+          Remember your password?{" "}
+          <Link to="/login">
+            {" "}
+            <span onClick={() => onSwitchAuthStep("login")}>Login</span>
+          </Link>
+        </p>
+
+        {/* Toast Container */}
+        <ToastContainer />
+      </form>
+    </div>
   );
 };
 

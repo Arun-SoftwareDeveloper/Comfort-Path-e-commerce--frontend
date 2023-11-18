@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../Styles/Register.css";
+import "../FormsStyles/Register.css";
+import { Link } from "react-router-dom";
 
 const Register = ({ onSwitchAuthStep }) => {
   const [firstName, setFirstName] = useState("");
@@ -73,7 +74,10 @@ const Register = ({ onSwitchAuthStep }) => {
         </button>
         <p>
           Already have an account?{" "}
-          <span onClick={() => onSwitchAuthStep("login")}>Login</span>
+          <Link to="/login">
+            {" "}
+            <span onClick={() => onSwitchAuthStep("login")}>Login</span>
+          </Link>
         </p>
       </form>
       <ToastContainer />

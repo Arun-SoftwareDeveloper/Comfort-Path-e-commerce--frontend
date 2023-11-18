@@ -1,5 +1,4 @@
-// AddToCart.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import FooterContainer from "./FooterContainer";
 import "../Styles/AddToCart.css";
@@ -14,12 +13,22 @@ function AddToCart({
 }) {
   const [showModal, setShowModal] = useState(false);
 
+  useEffect(() => {
+    // Load cart data from localStorage on component mount
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    console.log(storedCart);
+    setCart(storedCart);
+  }, []);
+
+  useEffect(() => {
+    // Save cart data to localStorage whenever cart changes
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   const handleOpenModal = () => {
-    // Add conditions to determine when to open the modal
     if (cart.length > 0) {
       setShowModal(true);
     } else {
-      // You can show an alert or perform other actions if the cart is empty
       alert("Your cart is empty.");
     }
   };
@@ -37,6 +46,11 @@ function AddToCart({
         <div>
           {cart.map((item, index) => (
             <div key={index} className="cart-item">
+              <img
+                src={item.image}
+                alt={item.name}
+                className="cart-item-image"
+              />
               <p>
                 {item.name} - ₹{item.price}
               </p>
@@ -78,7 +92,7 @@ function AddToCart({
         <div className="container text-center">
           <p className="footer-container">Copyright &copy; Comfort Path 2023</p>
         </div>
-      </footer>{" "}
+      </footer>
     </div>
   );
 }

@@ -19,6 +19,7 @@ import Register from "./Forms/Register";
 import ForgotPassword from "./Forms/ForgotPassword";
 import ResetPassword from "./Forms/ResetPassword";
 import Home from "./Components/Home";
+import KidsShoes from "./Components/KidsShoes";
 
 function App({ handleToggleWishlist }) {
   const [cart, setCart] = useState([]);
@@ -115,6 +116,17 @@ function App({ handleToggleWishlist }) {
             path="/womenShoes"
             element={
               <WomenShoesPage
+                setCart={setCart}
+                handleAddToCart={handleAddToCart}
+                handleToggleWishlist={handleToggleWishlist}
+                token={token}
+              />
+            }
+          />
+          <Route
+            path="/kidsShoes"
+            element={
+              <KidsShoes
                 setCart={setCart}
                 handleAddToCart={handleAddToCart}
                 handleToggleWishlist={handleToggleWishlist}

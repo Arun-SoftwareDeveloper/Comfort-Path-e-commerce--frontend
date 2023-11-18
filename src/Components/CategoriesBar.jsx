@@ -7,7 +7,7 @@ function CategoriesBar() {
     <div className="container mt-4">
       <div className="row">
         <div className="col">
-          <Link to="menShoes">
+          <Link to="/menShoes">
             <p className="text">Men</p>
           </Link>
         </div>
@@ -17,7 +17,9 @@ function CategoriesBar() {
           </Link>
         </div>
         <div className="col">
-          <p className="text">Kids</p>
+          <Link to="/kidsShoes">
+            <p className="text">Kids</p>
+          </Link>
         </div>
       </div>
     </div>

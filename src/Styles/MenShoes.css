@@ -74,6 +74,32 @@ p {
   margin-top: 10px;
 }
 
+/* MenShoes.css */
+
+/* Filter button styles */
+.filter-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filter-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Position the filter button to the top right */
+.filter-button.text-right {
+  float: right;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+
+/* Add any additional styles as needed */
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   h1 {

@@ -1,17 +1,17 @@
+// MenShoes.jsx
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../Components/SearchBar";
-import menProducts from "../Products/MenProducts";
+import KidsProducts from "../Products/KidsProducts";
 import FooterContainer from "./FooterContainer";
+import { Navbar } from "react-bootstrap";
 import NavigationBar from "../Components/NavBar";
 import CategoriesBar from "./CategoriesBar";
-import "../Styles/MenShoes.css";
+import "../Styles/KidsShoes.css";
 
-const MenShoes = ({ handleAddToCart }) => {
-  const [products, setProducts] = useState(menProducts);
+const KidsShoes = ({ handleAddToCart }) => {
+  const [products, setProducts] = useState(KidsProducts);
   const [sortOption, setSortOption] = useState("relevance");
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
   const navigate = useNavigate();
 
   const sortProducts = (option) => {
@@ -95,6 +95,23 @@ const MenShoes = ({ handleAddToCart }) => {
                 Add to Cart
               </button>
             </Link>
+            {/* <button
+              className={`btn btn-${
+                product.isInWishlist ? "danger" : "outline-secondary"
+              }`}
+              onClick={() => handleToggleWishlist(index)}
+            >
+              {product.isInWishlist
+                ? "Remove from Wishlist"
+                : "Add to Wishlist"}
+            </button>
+            {!product.isInWishlist && (
+              <Link to="/wishList">
+                <button className="btn btn-primary ml-2">
+                  View Men's Shoes
+                </button>
+              </Link>
+            )} */}
           </div>
         </div>
       </div>
@@ -105,32 +122,30 @@ const MenShoes = ({ handleAddToCart }) => {
     setSortOption(option);
   };
 
-  const filterProducts = () => {
-    let filteredProducts = menProducts;
-
-    // Filter by price range
-    if (minPrice !== "" && maxPrice !== "") {
-      filteredProducts = filteredProducts.filter(
-        (product) =>
-          product.price >= parseInt(minPrice) &&
-          product.price <= parseInt(maxPrice)
-      );
-    }
-
-    // Add more filter options (brands, etc.) as needed
+  const filterProducts = (searchQuery) => {
+    const filteredProducts = menProducts.filter((product) =>
+      product.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     setProducts(filteredProducts);
   };
 
-  const applyFilters = () => {
-    filterProducts();
-
-    // Close the modal after applying filters
-    document.getElementById("filterModalClose").click();
+  const handleToggleWishlist = (index) => {
+    const updatedProducts = [...products];
+    updatedProducts[index] = {
+      ...updatedProducts[index],
+      isInWishlist: !updatedProducts[index].isInWishlist,
+    };
+    setProducts(updatedProducts);
+    if (!updatedProducts[index].isInWishlist) {
+      navigate("/wishList");
+    }
   };
 
   return (
     <div className="container mt-4">
+      {/* <NavigationBar /> */}
+
       <h1>Welcome to Comfort Path</h1>
       <p>
         Explore our wide range of products and enjoy a comfortable shopping
@@ -172,85 +187,6 @@ const MenShoes = ({ handleAddToCart }) => {
         </button>
       </div>
 
-      {/* Filter button */}
-      <button
-        type="button"
-        className="btn btn-secondary ml-2 filter-button"
-        data-toggle="modal"
-        data-target="#filterModal"
-        style={{ width: "100px" }}
-      >
-        Filter
-      </button>
-
-      {/* Filter Modal */}
-      <div
-        className="modal fade"
-        id="filterModal"
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="filterModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="filterModalLabel">
-                Filter Options
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              {/* Add filter options here */}
-              <div className="form-group">
-                <label htmlFor="minPrice">Min Price:</label>
-                <input
-                  type="number"
-                  id="minPrice"
-                  className="form-control"
-                  value={minPrice}
-                  onChange={(e) => setMinPrice(e.target.value)}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="maxPrice">Max Price:</label>
-                <input
-                  type="number"
-                  id="maxPrice"
-                  className="form-control"
-                  value={maxPrice}
-                  onChange={(e) => setMaxPrice(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={applyFilters}
-              >
-                Apply Filters
-              </button>
-              <button
-                type="button"
-                className="btn btn-secondary"
-                id="filterModalClose"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Product listings container */}
       <div className="row" id="productList">
         {generateProductCards()}
@@ -262,4 +198,4 @@ const MenShoes = ({ handleAddToCart }) => {
   );
 };
 
-export default MenShoes;
+export default KidsShoes;

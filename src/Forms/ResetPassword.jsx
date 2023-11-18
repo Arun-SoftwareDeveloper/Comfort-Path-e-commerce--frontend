@@ -1,7 +1,10 @@
 // ResetPasswordForm.jsx
 import React, { useState } from "react";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import backendApi from "../BackendServerApi";
+import "../FormsStyles/ResetPassword.css";
 
 const ResetPassword = ({ onSwitchAuthStep, resetToken }) => {
   const [password, setPassword] = useState("");
@@ -17,24 +20,39 @@ const ResetPassword = ({ onSwitchAuthStep, resetToken }) => {
       });
 
       // Handle success, e.g., display success message
-      console.log("Password reset successful");
+      toast.success("Password reset successful", { position: "top-right" });
     } catch (error) {
       // Handle error, e.g., display error message
+      toast.error("Error resetting password. Please try again.", {
+        position: "top-right",
+      });
       console.error("Error resetting password:", error);
     }
   };
 
   return (
-    <form className="auth-form">
-      {/* ... (other form fields) */}
-      <button type="submit" onClick={handleResetPassword}>
-        Reset Password
-      </button>
-      <p>
-        Remember your password?{" "}
-        <span onClick={() => onSwitchAuthStep("login")}>Login</span>
-      </p>
-    </form>
+    <div className="auth-container">
+      <form className="auth-form">
+        <label>
+          New Password:
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
+        <button type="submit" onClick={handleResetPassword}>
+          Reset Password
+        </button>
+        <p>
+          Remember your password?{" "}
+          <span onClick={() => onSwitchAuthStep("login")}>Login</span>
+        </p>
+
+        {/* Toast Container */}
+        <ToastContainer />
+      </form>
+    </div>
   );
 };
 

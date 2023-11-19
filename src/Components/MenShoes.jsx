@@ -8,6 +8,7 @@ import SearchBar from "../Components/SearchBar";
 import FooterContainer from "./FooterContainer";
 import CategoriesBar from "./CategoriesBar";
 import menProducts from "../Products/MenProducts";
+import backendApi from "../BackendServerApi";
 import "../Styles/MenShoes.css";
 
 const MenShoes = ({ handleAddToCart }) => {
@@ -147,18 +148,15 @@ const MenShoes = ({ handleAddToCart }) => {
   const handleBuyNowSubmit = async () => {
     try {
       // Create order API call
-      const orderResponse = await fetch(
-        "http://localhost:4000/payment/create-order",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            recipientEmail,
-          }),
-        }
-      );
+      const orderResponse = await fetch(`${backendApi}/payment/create-order`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          recipientEmail,
+        }),
+      });
 
       // Assuming order creation is successful, navigate to bill
       navigate(`/bill`, {

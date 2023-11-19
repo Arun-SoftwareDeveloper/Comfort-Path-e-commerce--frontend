@@ -1,4 +1,4 @@
-// LoginForm.jsx
+// Login.jsx
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -11,8 +11,33 @@ const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
+
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    // Validation
+    let valid = true;
+    const newErrors = { email: "", password: "" };
+
+    if (!email.trim()) {
+      valid = false;
+      newErrors.email = "Email is required";
+    }
+
+    if (!password.trim()) {
+      valid = false;
+      newErrors.password = "Password is required";
+    }
+
+    setErrors(newErrors);
+
+    if (!valid) {
+      return;
+    }
 
     try {
       // Make API request to login
@@ -21,6 +46,9 @@ const Login = ({ onLogin }) => {
         password,
       });
 
+      if (response.status === 401) {
+        toast.error("Incorrect password");
+      }
       // Handle success, store token in localStorage
       const { token } = response.data;
       onLogin(token);
@@ -45,11 +73,14 @@ const Login = ({ onLogin }) => {
           </label>
           <input
             type="email"
-            className="form-control"
+            className={`form-control ${errors.email && "is-invalid"}`}
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          {errors.email && (
+            <div className="invalid-feedback">{errors.email}</div>
+          )}
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label">
@@ -57,11 +88,14 @@ const Login = ({ onLogin }) => {
           </label>
           <input
             type="password"
-            className="form-control"
+            className={`form-control ${errors.password && "is-invalid"}`}
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          {errors.password && (
+            <div className="invalid-feedback">{errors.password}</div>
+          )}
         </div>
         <button type="submit" className="btn btn-primary" onClick={handleLogin}>
           Login

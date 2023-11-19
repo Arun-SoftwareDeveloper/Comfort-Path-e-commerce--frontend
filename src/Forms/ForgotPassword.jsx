@@ -1,4 +1,4 @@
-// ForgotPasswordForm.jsx
+// ForgotPassword.jsx
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -9,8 +9,27 @@ import backendApi from "../BackendServerApi";
 const ForgotPassword = ({ onSwitchAuthStep }) => {
   const [email, setEmail] = useState("");
 
+  const [errors, setErrors] = useState({
+    email: "",
+  });
+
   const handleForgotPassword = async (e) => {
     e.preventDefault();
+
+    // Validation
+    let valid = true;
+    const newErrors = { email: "" };
+
+    if (!email.trim()) {
+      valid = false;
+      newErrors.email = "Email is required";
+    }
+
+    setErrors(newErrors);
+
+    if (!valid) {
+      return;
+    }
 
     try {
       // Make API request to initiate password reset
@@ -38,11 +57,14 @@ const ForgotPassword = ({ onSwitchAuthStep }) => {
           </label>
           <input
             type="email"
-            className="form-control"
+            className={`form-control ${errors.email && "is-invalid"}`}
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          {errors.email && (
+            <div className="invalid-feedback">{errors.email}</div>
+          )}
         </div>
         <button
           type="submit"

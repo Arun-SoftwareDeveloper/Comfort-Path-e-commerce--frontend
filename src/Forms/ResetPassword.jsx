@@ -1,4 +1,4 @@
-// ResetPasswordForm.jsx
+// ResetPassword.jsx
 import React, { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
@@ -8,9 +8,35 @@ import { Link } from "react-router-dom";
 
 const ResetPassword = ({ resetToken, onSwitchAuthStep }) => {
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [errors, setErrors] = useState({
+    password: "",
+    confirmPassword: "",
+  });
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
+
+    // Validation
+    let valid = true;
+    const newErrors = { password: "", confirmPassword: "" };
+
+    if (!password.trim()) {
+      valid = false;
+      newErrors.password = "Password is required";
+    }
+
+    if (password !== confirmPassword) {
+      valid = false;
+      newErrors.confirmPassword = "Passwords do not match";
+    }
+
+    setErrors(newErrors);
+
+    if (!valid) {
+      return;
+    }
 
     try {
       // Make API request to reset password
@@ -47,7 +73,23 @@ const ResetPassword = ({ resetToken, onSwitchAuthStep }) => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className={`form-control ${errors.password && "is-invalid"}`}
           />
+          {errors.password && (
+            <div className="invalid-feedback">{errors.password}</div>
+          )}
+        </label>
+        <label>
+          Confirm Password:
+          <input
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className={`form-control ${errors.confirmPassword && "is-invalid"}`}
+          />
+          {errors.confirmPassword && (
+            <div className="invalid-feedback">{errors.confirmPassword}</div>
+          )}
         </label>
         <button type="submit" onClick={handleResetPassword}>
           Reset Password

@@ -1,3 +1,5 @@
+// MenShoes.js
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -142,14 +144,35 @@ const MenShoes = ({ handleAddToCart }) => {
     handleShowBuyNowModal();
   };
 
-  const handleBuyNowSubmit = () => {
-    navigate(`/bill`, {
-      state: {
-        selectedProduct,
-      },
-    });
-    handleCloseBuyNowModal();
-    toast.success("Ordered Placed Successfully");
+  const handleBuyNowSubmit = async () => {
+    try {
+      // Create order API call
+      const orderResponse = await fetch(
+        "http://localhost:4000/payment/create-order",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            recipientEmail,
+          }),
+        }
+      );
+
+      // Assuming order creation is successful, navigate to bill
+      navigate(`/bill`, {
+        state: {
+          selectedProduct,
+        },
+      });
+
+      handleCloseBuyNowModal();
+      toast.success("Order Placed Successfully");
+    } catch (error) {
+      console.error("Error creating order: ", error);
+      toast.error("Failed to Place Order");
+    }
   };
 
   return (

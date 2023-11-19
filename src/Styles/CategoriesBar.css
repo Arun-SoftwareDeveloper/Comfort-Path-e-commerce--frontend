@@ -23,3 +23,12 @@
 .link-no-underline:hover {
   text-decoration: none;
 }
+
+Link {
+  text-decoration: none;
+  color: inherit;
+}
+
+Link:hover {
+  text-decoration: none;
+}

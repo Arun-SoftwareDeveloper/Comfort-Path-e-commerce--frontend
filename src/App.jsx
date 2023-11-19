@@ -71,13 +71,11 @@ function App({ handleToggleWishlist }) {
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route
             path="/resetPassword/:token"
-            render={(props) => (
+            element={
               <ResetPassword
-                {...props}
-                resetToken={props.match.params.token}
-                // Add other props if needed
+                resetToken={window.location.pathname.split("/").pop()} // Extract reset token from URL
               />
-            )}
+            }
           />
           <Route
             path="/menShoes"

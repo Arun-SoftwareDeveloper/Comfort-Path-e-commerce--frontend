@@ -5,11 +5,9 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NavBar from "./Components/NavBar";
-import AboutContainer from "./Components/AboutContainer";
-import MainContainerCourosel from "./Components/MainContainerCourosel";
 import MenShoes from "./Components/MenShoes";
 import WomenShoesPage from "./Components/WomenShoes";
 import AddToCart from "./Components/AddToCart";
@@ -20,6 +18,7 @@ import ForgotPassword from "./Forms/ForgotPassword";
 import ResetPassword from "./Forms/ResetPassword";
 import Home from "./Components/Home";
 import KidsShoes from "./Components/KidsShoes";
+import Bill from "./Components/Bill";
 
 function App({ handleToggleWishlist }) {
   const [cart, setCart] = useState([]);
@@ -28,16 +27,6 @@ function App({ handleToggleWishlist }) {
 
   const handleLogin = (userToken) => {
     setToken(userToken);
-
-    toast.success("User is logged in with token", {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
   };
 
   const handleAddToCart = (product) => {
@@ -134,6 +123,7 @@ function App({ handleToggleWishlist }) {
               />
             }
           />
+          <Route path="/bill" element={<Bill />} />
         </Routes>
       </Router>
       <ToastContainer />

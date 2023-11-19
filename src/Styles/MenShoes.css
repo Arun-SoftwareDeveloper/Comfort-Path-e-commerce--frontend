@@ -100,6 +100,10 @@ p {
 
 /* Add any additional styles as needed */
 
+.price {
+  font-weight: 20px;
+  font-weight: bolder;
+}
 /* Responsive adjustments */
 @media (max-width: 768px) {
   h1 {

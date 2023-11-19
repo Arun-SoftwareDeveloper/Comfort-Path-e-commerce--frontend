@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import { Modal, Button } from "react-bootstrap";
 import SearchBar from "../Components/SearchBar";
-import menProducts from "../Products/MenProducts";
 import FooterContainer from "./FooterContainer";
-import NavigationBar from "../Components/NavBar";
 import CategoriesBar from "./CategoriesBar";
+import menProducts from "../Products/MenProducts";
 import "../Styles/MenShoes.css";
 
 const MenShoes = ({ handleAddToCart }) => {
@@ -12,13 +13,22 @@ const MenShoes = ({ handleAddToCart }) => {
   const [sortOption, setSortOption] = useState("relevance");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [showFilterModal, setShowFilterModal] = useState(false);
+  const [showBuyNowModal, setShowBuyNowModal] = useState(false);
+  const [recipientEmail, setRecipientEmail] = useState("");
   const navigate = useNavigate();
+
+  const handleShowFilterModal = () => setShowFilterModal(true);
+  const handleCloseFilterModal = () => setShowFilterModal(false);
+
+  const handleShowBuyNowModal = () => setShowBuyNowModal(true);
+  const handleCloseBuyNowModal = () => setShowBuyNowModal(false);
 
   const sortProducts = (option) => {
     let sortedProducts = [...products];
     switch (option) {
       case "relevance":
-        // No specific sorting, use the original order
         break;
       case "highest":
         sortedProducts.sort((a, b) => b.price - a.price);
@@ -34,7 +44,6 @@ const MenShoes = ({ handleAddToCart }) => {
 
   const generateProductCards = () => {
     const sortedProducts = sortProducts(sortOption);
-
     return sortedProducts.map((product, index) => (
       <div key={index} className="col-lg-4 col-md-6 mb-4">
         <div className="card">
@@ -85,48 +94,62 @@ const MenShoes = ({ handleAddToCart }) => {
           </div>
           <div className="card-body">
             <h5 className="card-title">{product.name}</h5>
-            <p className="card-text">Price: ₹{product.price}</p>
+            <p className="card-text price">Price: ₹{product.price}</p>
             <p className="card-text">{product.description}</p>
-            <Link to="/addToCart">
-              <button
-                className="btn btn-primary"
-                onClick={() => handleAddToCart(product)}
-              >
-                Add to Cart
-              </button>
-            </Link>
+            <button
+              className="btn btn-success ml-2"
+              onClick={() => handleBuyNow(product)}
+            >
+              Buy Now
+            </button>
           </div>
         </div>
       </div>
     ));
   };
 
-  const handleSortChange = (option) => {
-    setSortOption(option);
-  };
+  const handleSortChange = (option) => setSortOption(option);
 
-  const filterProducts = () => {
-    let filteredProducts = menProducts;
-
-    // Filter by price range
-    if (minPrice !== "" && maxPrice !== "") {
-      filteredProducts = filteredProducts.filter(
-        (product) =>
-          product.price >= parseInt(minPrice) &&
-          product.price <= parseInt(maxPrice)
-      );
-    }
-
-    // Add more filter options (brands, etc.) as needed
-
+  const filterProducts = (searchQuery) => {
+    const filteredProducts = menProducts.filter((product) =>
+      product.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
     setProducts(filteredProducts);
   };
 
-  const applyFilters = () => {
-    filterProducts();
+  const handleFilterByPrice = () => {
+    let filteredProducts = [...menProducts];
 
-    // Close the modal after applying filters
-    document.getElementById("filterModalClose").click();
+    if (minPrice !== "") {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.price >= parseInt(minPrice, 10)
+      );
+    }
+
+    if (maxPrice !== "") {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.price <= parseInt(maxPrice, 10)
+      );
+    }
+
+    setProducts(filteredProducts);
+    handleCloseFilterModal();
+  };
+
+  const handleBuyNow = (product) => {
+    setSelectedProduct(product);
+    setRecipientEmail("");
+    handleShowBuyNowModal();
+  };
+
+  const handleBuyNowSubmit = () => {
+    navigate(`/bill`, {
+      state: {
+        selectedProduct,
+      },
+    });
+    handleCloseBuyNowModal();
+    toast.success("Ordered Placed Successfully");
   };
 
   return (
@@ -136,12 +159,11 @@ const MenShoes = ({ handleAddToCart }) => {
         Explore our wide range of products and enjoy a comfortable shopping
         experience.
       </p>
+
       <CategoriesBar />
 
-      {/* SearchBar */}
       <SearchBar onSearch={filterProducts} />
 
-      {/* Sort options */}
       <div className="btn-group mt-2">
         <button
           type="button"
@@ -172,91 +194,77 @@ const MenShoes = ({ handleAddToCart }) => {
         </button>
       </div>
 
-      {/* Filter button */}
-      <button
-        type="button"
-        className="btn btn-secondary ml-2 filter-button"
-        data-toggle="modal"
-        data-target="#filterModal"
-        style={{ width: "100px" }}
-      >
-        Filter
-      </button>
-
-      {/* Filter Modal */}
-      <div
-        className="modal fade"
-        id="filterModal"
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="filterModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="filterModalLabel">
-                Filter Options
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
+      <div className="mt-2">
+        <Button
+          className="btn btn-primary ml-2"
+          onClick={handleShowFilterModal}
+        >
+          Filter by Price
+        </Button>
+        <Modal show={showFilterModal} onHide={handleCloseFilterModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Filter by Price Range</Modal.Title>
+            <Button variant="secondary" onClick={handleCloseFilterModal}>
+              Close
+            </Button>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Enter the price range:</p>
+            <div>
+              <label>Min Price:</label>
+              <input
+                type="number"
+                value={minPrice}
+                onChange={(e) => setMinPrice(e.target.value)}
+              />
             </div>
-            <div className="modal-body">
-              {/* Add filter options here */}
-              <div className="form-group">
-                <label htmlFor="minPrice">Min Price:</label>
-                <input
-                  type="number"
-                  id="minPrice"
-                  className="form-control"
-                  value={minPrice}
-                  onChange={(e) => setMinPrice(e.target.value)}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="maxPrice">Max Price:</label>
-                <input
-                  type="number"
-                  id="maxPrice"
-                  className="form-control"
-                  value={maxPrice}
-                  onChange={(e) => setMaxPrice(e.target.value)}
-                />
-              </div>
+            <div>
+              <label>Max Price:</label>
+              <input
+                type="number"
+                value={maxPrice}
+                onChange={(e) => setMaxPrice(e.target.value)}
+              />
             </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={applyFilters}
-              >
-                Apply Filters
-              </button>
-              <button
-                type="button"
-                className="btn btn-secondary"
-                id="filterModalClose"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={handleFilterByPrice}>
+              Apply Filter
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
 
-      {/* Product listings container */}
+      <Modal show={showBuyNowModal} onHide={handleCloseBuyNowModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Enter Recipient's Email</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="form-group">
+            <label htmlFor="recipientEmail">Recipient's Email:</label>
+            <input
+              type="email"
+              className="form-control"
+              id="recipientEmail"
+              value={recipientEmail}
+              onChange={(e) => setRecipientEmail(e.target.value)}
+            />
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseBuyNowModal}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleBuyNowSubmit}>
+            Buy Now
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
       <div className="row" id="productList">
         {generateProductCards()}
       </div>
 
-      {/* Footer */}
       <FooterContainer />
     </div>
   );

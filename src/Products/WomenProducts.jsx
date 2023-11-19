@@ -22,7 +22,7 @@ const womenProducts = [
     name: "NIKE-AIRMAX",
     description:
       "The Air Max SYSTM brings back everything you love about your favorite '80s vibes (without the parachute trousers).",
-    price: 8000,
+    price: 6200,
     images: [nikeairmax1, nikeairmax2, nikeairmax3],
     isInWishlist: false,
   },
@@ -30,7 +30,7 @@ const womenProducts = [
     name: "PUMA Amare Running Shoes",
     description:
       "Sport style categories from PUMA include Sneakers, Slip-ons and Loungewear. It is innovative and fast designs.",
-    price: 3300,
+    price: 2100,
     images: [
       "https://assets.ajio.com/medias/sys_master/root/20220801/SPlW/62e7f206f997dd03e21316b6/-473Wx593H-469205052-pink-MODEL.jpg",
       "https://assets.ajio.com/medias/sys_master/root/20220801/lHzS/62e7fc52f997dd03e213506d/-473Wx593H-469205052-pink-MODEL4.jpg",
@@ -42,7 +42,7 @@ const womenProducts = [
     name: "GUCCI WOMEN ACE SNEAKERS",
     description:
       "Louis Vuitton designs shoes for men to fit every occasion elegant derbies.",
-    price: 9000,
+    price: 3200,
     images: [gucciWomen1, gucciWomen2, gucciWomen3],
     isInWishlist: false,
   },
@@ -50,16 +50,28 @@ const womenProducts = [
     name: "VERSACE CHAIN-REACTION",
     description:
       "A chunkier construction defines the shape, while a metal 'ACE' tag shines atop the lace-up closure.",
-    price: 29000,
+    price: 12000,
     images: [versaceWomen1, versaceWomen2, versaceWomen3],
     isInWishlist: false,
   },
   {
     name: "JUST CAVALLI",
-    price: 23000,
+    price: 2300,
     description:
       "Just Cavalli stilettos are a tribute to haute couture fashion. With the snake print that adds a dose of drama to your look.",
     images: [jcWomen1, jcWomen2, jcWomen3],
+    isInWishlist: false,
+  },
+  {
+    name: "REEBOK RUNINNG SHOES",
+    price: 1800,
+    description:
+      "The brand embodies and champions an attitude that emanates from the field, but goes beyond just sport.",
+    images: [
+      "https://assets.ajio.com/medias/sys_master/root/20220316/uoKV/6231eb1ef997dd03e218d847/-1117Wx1400H-460931301-navy-MODEL.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20220316/aEID/6231e56baeb26921afde3353/-1117Wx1400H-460931301-navy-MODEL6.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20220316/DqeD/6231ede3aeb26921afde4b4e/-473Wx593H-460931301-navy-MODEL8.jpg",
+    ],
     isInWishlist: false,
   },
   {
@@ -95,14 +107,38 @@ const womenProducts = [
     isInWishlist: false,
   },
   {
-    name: "REEBOK RUNINNG SHOES",
-    price: 1800,
+    name: "NEW BALANCE",
+    price: 2300,
     description:
       "The brand embodies and champions an attitude that emanates from the field, but goes beyond just sport.",
     images: [
-      "https://assets.ajio.com/medias/sys_master/root/20220316/uoKV/6231eb1ef997dd03e218d847/-1117Wx1400H-460931301-navy-MODEL.jpg",
-      "https://assets.ajio.com/medias/sys_master/root/20220316/aEID/6231e56baeb26921afde3353/-1117Wx1400H-460931301-navy-MODEL6.jpg",
-      "https://assets.ajio.com/medias/sys_master/root/20220316/DqeD/6231ede3aeb26921afde4b4e/-473Wx593H-460931301-navy-MODEL8.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20230215/fH5h/63ecf318f997dde6f4aa4e22/-1117Wx1400H-469224797-pink-MODEL.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20230215/9wz8/63ed01a8f997dde6f4aaaa1c/-1117Wx1400H-469224797-pink-MODEL2.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20230215/u9WO/63ecfe3ff997dde6f4aa93b6/-473Wx593H-469224797-pink-MODEL5.jpg",
+    ],
+    isInWishlist: false,
+  },
+  {
+    name: "NIKE",
+    price: 2400,
+    description:
+      "Powerful, strong, durable – every athlete. With innovative sportswear designed to bring optimum comfort and support.",
+    images: [
+      "https://assets.ajio.com/medias/sys_master/root/20230928/ba7g/6515a055ddf77915190cfed4/-1117Wx1400H-469551403-black-MODEL.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20230928/NJ8r/6515923dddf77915190caceb/-1117Wx1400H-469551403-black-MODEL8.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20230928/1HOv/6515992fafa4cf41f515810c/-1117Wx1400H-469551403-black-MODEL7.jpg",
+    ],
+    isInWishlist: false,
+  },
+  {
+    name: "CAMPUS",
+    description:
+      "A chunkier construction defines the shape, while a metal 'ACE' tag shines atop the lace-up closure.",
+    price: 700,
+    images: [
+      "https://assets.ajio.com/medias/sys_master/root/20230621/ijhz/64924b38d55b7d0c6388ade7/-1117Wx1400H-463848215-grey-MODEL.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20230621/vJuF/64924b38d55b7d0c6388adfc/-473Wx593H-463848215-grey-MODEL6.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20230621/lcC5/64924b38d55b7d0c6388ae12/-1117Wx1400H-463848215-grey-MODEL5.jpg",
     ],
     isInWishlist: false,
   },

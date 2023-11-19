@@ -1,24 +1,27 @@
-// MenShoes.jsx
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Modal, Button } from "react-bootstrap";
 import SearchBar from "../Components/SearchBar";
 import WomenShoes from "../Products/WomenProducts";
 import FooterContainer from "./FooterContainer";
-import { Navbar } from "react-bootstrap";
-import NavigationBar from "../Components/NavBar";
-import "../Styles/MenShoes.css";
 import CategoriesBar from "./CategoriesBar";
+import "../Styles/MenShoes.css";
 
 const WomenShoesPage = ({ handleAddToCart }) => {
   const [products, setProducts] = useState(WomenShoes);
   const [sortOption, setSortOption] = useState("relevance");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [showFilterModal, setShowFilterModal] = useState(false);
   const navigate = useNavigate();
+
+  const handleShowFilterModal = () => setShowFilterModal(true);
+  const handleCloseFilterModal = () => setShowFilterModal(false);
 
   const sortProducts = (option) => {
     let sortedProducts = [...products];
     switch (option) {
       case "relevance":
-        // No specific sorting, use the original order
         break;
       case "highest":
         sortedProducts.sort((a, b) => b.price - a.price);
@@ -34,7 +37,6 @@ const WomenShoesPage = ({ handleAddToCart }) => {
 
   const generateProductCards = () => {
     const sortedProducts = sortProducts(sortOption);
-
     return sortedProducts.map((product, index) => (
       <div key={index} className="col-lg-4 col-md-6 mb-4">
         <div className="card">
@@ -85,7 +87,7 @@ const WomenShoesPage = ({ handleAddToCart }) => {
           </div>
           <div className="card-body">
             <h5 className="card-title">{product.name}</h5>
-            <p className="card-text">Price: ₹{product.price}</p>
+            <p className="card-text price">Price: ₹{product.price}</p>
             <p className="card-text">{product.description}</p>
             <Link to="/addToCart">
               <button
@@ -95,56 +97,42 @@ const WomenShoesPage = ({ handleAddToCart }) => {
                 Add to Cart
               </button>
             </Link>
-            {/* <button
-              className={`btn btn-${
-                product.isInWishlist ? "danger" : "outline-secondary"
-              }`}
-              onClick={() => handleToggleWishlist(index)}
-            >
-              {product.isInWishlist
-                ? "Remove from Wishlist"
-                : "Add to Wishlist"}
-            </button>
-            {!product.isInWishlist && (
-              <Link to="/wishList">
-                <button className="btn btn-primary ml-2">
-                  View Men's Shoes
-                </button>
-              </Link>
-            )} */}
           </div>
         </div>
       </div>
     ));
   };
 
-  const handleSortChange = (option) => {
-    setSortOption(option);
-  };
+  const handleSortChange = (option) => setSortOption(option);
 
   const filterProducts = (searchQuery) => {
-    const filteredProducts = menProducts.filter((product) =>
+    const filteredProducts = WomenShoes.filter((product) =>
       product.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
-
     setProducts(filteredProducts);
   };
 
-  const handleToggleWishlist = (index) => {
-    const updatedProducts = [...products];
-    updatedProducts[index] = {
-      ...updatedProducts[index],
-      isInWishlist: !updatedProducts[index].isInWishlist,
-    };
-    setProducts(updatedProducts);
-    if (!updatedProducts[index].isInWishlist) {
-      navigate("/wishList");
+  const handleFilterByPrice = () => {
+    let filteredProducts = [...WomenShoes];
+
+    if (minPrice !== "") {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.price >= parseInt(minPrice, 10)
+      );
     }
+
+    if (maxPrice !== "") {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.price <= parseInt(maxPrice, 10)
+      );
+    }
+
+    setProducts(filteredProducts);
+    handleCloseFilterModal();
   };
 
   return (
     <div className="container mt-4">
-      {/* <NavigationBar /> */}
       <h1>Welcome to Comfort Path</h1>
       <p>
         Explore our wide range of products and enjoy a comfortable shopping
@@ -153,9 +141,8 @@ const WomenShoesPage = ({ handleAddToCart }) => {
 
       <CategoriesBar />
 
-      {/* SearchBar */}
       <SearchBar onSearch={filterProducts} />
-      {/* Sort options */}
+
       <div className="btn-group mt-2">
         <button
           type="button"
@@ -186,12 +173,52 @@ const WomenShoesPage = ({ handleAddToCart }) => {
         </button>
       </div>
 
-      {/* Product listings container */}
+      <div className="mt-2">
+        <Button
+          className="btn btn-primary ml-2"
+          onClick={handleShowFilterModal}
+        >
+          Filter by Price
+        </Button>
+        <Modal show={showFilterModal} onHide={handleCloseFilterModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Filter by Price Range</Modal.Title>
+            <Button variant="secondary" onClick={handleCloseFilterModal}>
+              Close
+            </Button>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Enter the price range:</p>
+            <div>
+              <label>Min Price:</label>
+              <input
+                type="number"
+                value={minPrice}
+                onChange={(e) => setMinPrice(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Max Price:</label>
+              <input
+                type="number"
+                value={maxPrice}
+                onChange={(e) => setMaxPrice(e.target.value)}
+              />
+            </div>
+          </Modal.Body>
+          {/* Remove the close button from Modal.Footer if you only want one close button */}
+          <Modal.Footer>
+            <Button variant="primary" onClick={handleFilterByPrice}>
+              Apply Filter
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+
       <div className="row" id="productList">
         {generateProductCards()}
       </div>
 
-      {/* Footer */}
       <FooterContainer />
     </div>
   );

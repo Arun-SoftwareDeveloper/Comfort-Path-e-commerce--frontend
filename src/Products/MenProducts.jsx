@@ -38,6 +38,18 @@ const menProducts = [
     isInWishlist: false,
   },
   {
+    name: "PUMA-MOTOSPORT",
+    price: 2300,
+    description:
+      "Supreme performance reaches the peak of fan style in our BMW M Motorsports Drift Cat 8 shoe(specially for the motosport-bikers).",
+    images: [
+      "https://assets.ajio.com/medias/sys_master/root/h68/h2e/15440080240670/-473Wx593H-460569897-black-MODEL.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20220322/lpZc/6239c426aeb26921afea0016/-473Wx593H-460569897-black-MODEL8.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/h74/h91/15440078667806/-1117Wx1400H-460569897-black-MODEL4.jpg",
+    ],
+    isInWishlist: false,
+  },
+  {
     name: "NIKE-AIRMAX",
     price: 5900,
 
@@ -52,6 +64,18 @@ const menProducts = [
     isInWishlist: false,
   },
   {
+    name: "BUGATTI",
+    price: 1400,
+    description:
+      "From classic designs to modern interpretations, our collection offers multiple options to suit your style.",
+    isInWishlist: false,
+    images: [
+      "https://assets.ajio.com/medias/sys_master/root/20230523/yn8A/646becb5d55b7d0c63cf6441/-473Wx593H-466179354-brown-MODEL.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20230523/gwTQ/646becb5d55b7d0c63cf6409/-1117Wx1400H-466179354-brown-MODEL7.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20230523/Fnhn/646becb5d55b7d0c63cf63fd/-1117Wx1400H-466179354-brown-MODEL5.jpg",
+    ],
+  },
+  {
     name: "VEJA Campo Lace-Up Sneakers",
     price: 8700,
     description:
@@ -61,18 +85,6 @@ const menProducts = [
       "https://assets.ajio.com/medias/sys_master/root/20220301/fZBW/621d28f4f997dd03e2f59091/-1117Wx1400H-469096361-blackwhite-MODEL2.jpg",
       "https://assets.ajio.com/medias/sys_master/root/20220301/Mn3q/621d2452f997dd03e2f57ba1/-1117Wx1400H-469096361-blackwhite-MODEL3.jpg",
     ],
-  },
-  {
-    name: "PUMA-MOTOSPORT",
-    price: 2300,
-    description:
-      "Supreme performance reaches the peak of fan style in our BMW M Motorsports Drift Cat 8 shoe(specially for the motosport-bikers).",
-    images: [
-      "https://assets.ajio.com/medias/sys_master/root/h68/h2e/15440080240670/-473Wx593H-460569897-black-MODEL.jpg",
-      "https://assets.ajio.com/medias/sys_master/root/20220322/lpZc/6239c426aeb26921afea0016/-473Wx593H-460569897-black-MODEL8.jpg",
-      "https://assets.ajio.com/medias/sys_master/root/h74/h91/15440078667806/-1117Wx1400H-460569897-black-MODEL4.jpg",
-    ],
-    isInWishlist: false,
   },
   {
     name: "PUMA Ferrari Race X-",
@@ -106,18 +118,6 @@ const menProducts = [
       "https://assets.ajio.com/medias/sys_master/root/20231030/VSLm/653f9817afa4cf41f56882c9/-473Wx593H-469551556-black-MODEL.jpg",
       "https://assets.ajio.com/medias/sys_master/root/20231030/OC1K/653f9540afa4cf41f568705c/-1117Wx1400H-469551556-black-MODEL4.jpg",
       "https://assets.ajio.com/medias/sys_master/root/20231030/NpWH/653f9961afa4cf41f5688aa4/-473Wx593H-469551556-black-MODEL5.jpg",
-    ],
-  },
-  {
-    name: "BUGATTI",
-    price: 1400,
-    description:
-      "From classic designs to modern interpretations, our collection offers multiple options to suit your style.",
-    isInWishlist: false,
-    images: [
-      "https://assets.ajio.com/medias/sys_master/root/20230523/yn8A/646becb5d55b7d0c63cf6441/-473Wx593H-466179354-brown-MODEL.jpg",
-      "https://assets.ajio.com/medias/sys_master/root/20230523/gwTQ/646becb5d55b7d0c63cf6409/-1117Wx1400H-466179354-brown-MODEL7.jpg",
-      "https://assets.ajio.com/medias/sys_master/root/20230523/Fnhn/646becb5d55b7d0c63cf63fd/-1117Wx1400H-466179354-brown-MODEL5.jpg",
     ],
   },
   {

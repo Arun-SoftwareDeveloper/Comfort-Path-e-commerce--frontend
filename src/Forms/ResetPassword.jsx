@@ -5,7 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import backendApi from "../BackendServerApi";
 
-const ResetPassword = ({ onSwitchAuthStep, resetToken }) => {
+const ResetPasswordForm = ({ onSwitchAuthStep, resetToken }) => {
   const [password, setPassword] = useState("");
 
   const handleResetPassword = async (e) => {
@@ -14,8 +14,8 @@ const ResetPassword = ({ onSwitchAuthStep, resetToken }) => {
     try {
       // Make API request to reset password
       const response = await axios.post(`${backendApi}/resetPassword`, {
-        token: resetToken,
         password,
+        resetToken, // Pass the reset token in the request
       });
 
       // Handle success, e.g., display success message
@@ -55,4 +55,4 @@ const ResetPassword = ({ onSwitchAuthStep, resetToken }) => {
   );
 };
 
-export default ResetPassword;
+export default ResetPasswordForm;

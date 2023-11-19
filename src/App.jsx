@@ -70,8 +70,14 @@ function App({ handleToggleWishlist }) {
           <Route path="/register" element={<Register />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route
-            path="/resetPassword/:resetToken"
-            element={<ResetPassword />}
+            path="/resetPassword/:token"
+            render={(props) => (
+              <ResetPassword
+                {...props}
+                resetToken={props.match.params.token}
+                // Add other props if needed
+              />
+            )}
           />
           <Route
             path="/menShoes"

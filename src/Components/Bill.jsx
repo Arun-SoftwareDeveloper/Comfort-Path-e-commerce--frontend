@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Styles/Bill.css";
 import jsPDF from "jspdf";
@@ -7,8 +7,10 @@ import "jspdf-autotable";
 
 const Bill = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const selectedProduct = location.state?.selectedProduct;
   const [billData, setBillData] = useState(null);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     if (selectedProduct) {
@@ -28,7 +30,15 @@ const Bill = () => {
         })
         .catch((error) => console.error("Error:", error));
     }
-  }, [selectedProduct]);
+
+    // Hide the bill after 10 seconds and navigate to "/"
+    const timerId = setTimeout(() => {
+      setIsVisible(false);
+      navigate("/"); // Navigate to the home route
+    }, 10000);
+
+    return () => clearTimeout(timerId); // Cleanup the timer when the component unmounts or changes
+  }, [selectedProduct, history]);
 
   const handleDownloadPDF = () => {
     const doc = new jsPDF();
@@ -55,13 +65,8 @@ const Bill = () => {
     doc.save("invoice.pdf");
   };
 
-  if (!selectedProduct) {
-    return (
-      <div className="container mt-4">
-        <h2 className="text-center mb-4">Error</h2>
-        <p>No product selected for the bill.</p>
-      </div>
-    );
+  if (!selectedProduct || !isVisible) {
+    return null; // Don't render the component if no product is selected or if it's not visible
   }
 
   return (

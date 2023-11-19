@@ -70,12 +70,8 @@ function App({ handleToggleWishlist }) {
           <Route path="/register" element={<Register />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route
-            path="/resetPassword/:token"
-            element={
-              <ResetPassword
-                resetToken={window.location.pathname.split("/").pop()} // Extract reset token from URL
-              />
-            }
+            path="/resetPassword"
+            element={<ResetPassword />} // Extract reset token from URL
           />
           <Route
             path="/menShoes"

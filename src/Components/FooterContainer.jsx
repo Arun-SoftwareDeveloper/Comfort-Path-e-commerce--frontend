@@ -1,16 +1,11 @@
 import React from "react";
+import "../Styles/FooterContainer.css";
 
 function FooterContainer() {
   return (
-    <div className="container mt-4">
-      <footer className="bg-dark text-white mt-4">
-        <div className="container text-center">
-          <p className="footer-container" style={{ color: "white" }}>
-            Copyright &copy; Comfort Path 2023
-          </p>
-        </div>
-      </footer>
-    </div>
+    <footer className="bg-dark text-white mt-4 text-center">
+      <p className="footer-container">Copyright &copy; Comfort Path 2023</p>
+    </footer>
   );
 }
 

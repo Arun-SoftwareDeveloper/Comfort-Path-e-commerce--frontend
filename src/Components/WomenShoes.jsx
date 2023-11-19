@@ -1,22 +1,29 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import { Modal, Button } from "react-bootstrap";
 import SearchBar from "../Components/SearchBar";
-import WomenShoes from "../Products/WomenProducts";
-import FooterContainer from "./FooterContainer";
+import FooterContainer from "../Components/FooterContainer";
 import CategoriesBar from "./CategoriesBar";
-import "../Styles/MenShoes.css";
+import womenProducts from "../Products/WomenProducts";
+import backendApi from "../BackendServerApi";
 
 const WomenShoesPage = ({ handleAddToCart }) => {
-  const [products, setProducts] = useState(WomenShoes);
+  const [products, setProducts] = useState(womenProducts);
   const [sortOption, setSortOption] = useState("relevance");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [showFilterModal, setShowFilterModal] = useState(false);
+  const [showBuyNowModal, setShowBuyNowModal] = useState(false);
+  const [recipientEmail, setRecipientEmail] = useState("");
   const navigate = useNavigate();
 
   const handleShowFilterModal = () => setShowFilterModal(true);
   const handleCloseFilterModal = () => setShowFilterModal(false);
+
+  const handleShowBuyNowModal = () => setShowBuyNowModal(true);
+  const handleCloseBuyNowModal = () => setShowBuyNowModal(false);
 
   const sortProducts = (option) => {
     let sortedProducts = [...products];
@@ -89,14 +96,12 @@ const WomenShoesPage = ({ handleAddToCart }) => {
             <h5 className="card-title">{product.name}</h5>
             <p className="card-text price">Price: ₹{product.price}</p>
             <p className="card-text">{product.description}</p>
-            <Link to="/addToCart">
-              <button
-                className="btn btn-primary"
-                onClick={() => handleAddToCart(product)}
-              >
-                Add to Cart
-              </button>
-            </Link>
+            <button
+              className="btn btn-success ml-2"
+              onClick={() => handleBuyNow(product)}
+            >
+              Buy Now
+            </button>
           </div>
         </div>
       </div>
@@ -106,14 +111,14 @@ const WomenShoesPage = ({ handleAddToCart }) => {
   const handleSortChange = (option) => setSortOption(option);
 
   const filterProducts = (searchQuery) => {
-    const filteredProducts = WomenShoes.filter((product) =>
+    const filteredProducts = womenProducts.filter((product) =>
       product.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setProducts(filteredProducts);
   };
 
   const handleFilterByPrice = () => {
-    let filteredProducts = [...WomenShoes];
+    let filteredProducts = [...womenProducts];
 
     if (minPrice !== "") {
       filteredProducts = filteredProducts.filter(
@@ -129,6 +134,40 @@ const WomenShoesPage = ({ handleAddToCart }) => {
 
     setProducts(filteredProducts);
     handleCloseFilterModal();
+  };
+
+  const handleBuyNow = (product) => {
+    setSelectedProduct(product);
+    setRecipientEmail("");
+    handleShowBuyNowModal();
+  };
+
+  const handleBuyNowSubmit = async () => {
+    try {
+      // Create order API call
+      const orderResponse = await fetch(`${backendApi}/payment/create-order`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          recipientEmail,
+        }),
+      });
+
+      // Assuming order creation is successful, navigate to bill
+      navigate(`/bill`, {
+        state: {
+          selectedProduct,
+        },
+      });
+
+      handleCloseBuyNowModal();
+      toast.success("Order Placed Successfully");
+    } catch (error) {
+      console.error("Error creating order: ", error);
+      toast.error("Failed to Place Order");
+    }
   };
 
   return (
@@ -206,7 +245,6 @@ const WomenShoesPage = ({ handleAddToCart }) => {
               />
             </div>
           </Modal.Body>
-          {/* Remove the close button from Modal.Footer if you only want one close button */}
           <Modal.Footer>
             <Button variant="primary" onClick={handleFilterByPrice}>
               Apply Filter
@@ -214,6 +252,32 @@ const WomenShoesPage = ({ handleAddToCart }) => {
           </Modal.Footer>
         </Modal>
       </div>
+
+      <Modal show={showBuyNowModal} onHide={handleCloseBuyNowModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Enter Recipient's Email</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="form-group">
+            <label htmlFor="recipientEmail">Recipient's Email:</label>
+            <input
+              type="email"
+              className="form-control"
+              id="recipientEmail"
+              value={recipientEmail}
+              onChange={(e) => setRecipientEmail(e.target.value)}
+            />
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseBuyNowModal}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleBuyNowSubmit}>
+            Buy Now
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
       <div className="row" id="productList">
         {generateProductCards()}

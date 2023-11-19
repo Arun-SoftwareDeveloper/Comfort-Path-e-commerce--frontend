@@ -17,7 +17,7 @@ import adidasOriginals3 from "../Images/kids-versace3.jpg";
 // import adidasMonofit2 from ;
 // import adidasMonofit3 from ;
 
-const KidsProducts = [
+const kidsProducts = [
   {
     name: "NIKE-Jordan 4 Retro",
     price: 2500,
@@ -82,4 +82,4 @@ const KidsProducts = [
   },
 ];
 
-export default KidsProducts;
+export default kidsProducts;

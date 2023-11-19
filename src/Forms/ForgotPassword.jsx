@@ -30,23 +30,30 @@ const ForgotPassword = ({ onSwitchAuthStep }) => {
   };
 
   return (
-    <div className="auth-container">
+    <div className="container mt-4">
       <form className="auth-form">
-        <label>
-          Email:
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
+            Email:
+          </label>
           <input
             type="email"
+            className="form-control"
+            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-        </label>
-        <button type="submit" onClick={handleForgotPassword}>
+        </div>
+        <button
+          type="submit"
+          className="btn btn-primary"
+          onClick={handleForgotPassword}
+        >
           Reset Password
         </button>
         <p>
           Remember your password?{" "}
           <Link to="/login">
-            {" "}
             <span onClick={() => onSwitchAuthStep("login")}>Login</span>
           </Link>
         </p>

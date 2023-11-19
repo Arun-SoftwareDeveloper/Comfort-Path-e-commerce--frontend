@@ -1,15 +1,12 @@
-// MenShoes.js
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { Modal, Button } from "react-bootstrap";
 import SearchBar from "../Components/SearchBar";
-import FooterContainer from "./FooterContainer";
+import FooterContainer from "../Components/FooterContainer";
 import CategoriesBar from "./CategoriesBar";
 import menProducts from "../Products/MenProducts";
 import backendApi from "../BackendServerApi";
-import "../Styles/MenShoes.css";
 
 const MenShoes = ({ handleAddToCart }) => {
   const [products, setProducts] = useState(menProducts);

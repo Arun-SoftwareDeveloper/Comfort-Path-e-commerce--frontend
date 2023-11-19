@@ -1,8 +1,9 @@
+// Register.jsx
 import React, { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../FormsStyles/Register.css";
+import "../FormsStyles/Register.css"; // Import your custom styles if needed
 import { Link } from "react-router-dom";
 import backendApi from "../BackendServerApi";
 
@@ -36,47 +37,66 @@ const Register = ({ onSwitchAuthStep }) => {
   };
 
   return (
-    <div className="auth-container">
+    <div className="container mt-4">
       <form className="auth-form">
-        <label>
-          First Name:
+        <div className="mb-3">
+          <label htmlFor="firstName" className="form-label">
+            First Name:
+          </label>
           <input
             type="text"
+            className="form-control"
+            id="firstName"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
-        </label>
-        <label>
-          Last Name:
+        </div>
+        <div className="mb-3">
+          <label htmlFor="lastName" className="form-label">
+            Last Name:
+          </label>
           <input
             type="text"
+            className="form-control"
+            id="lastName"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
-        </label>
-        <label>
-          Email:
+        </div>
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
+            Email:
+          </label>
           <input
             type="email"
+            className="form-control"
+            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-        </label>
-        <label>
-          Password:
+        </div>
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
+            Password:
+          </label>
           <input
             type="password"
+            className="form-control"
+            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </label>
-        <button type="submit" onClick={handleRegister}>
+        </div>
+        <button
+          type="submit"
+          className="btn btn-primary"
+          onClick={handleRegister}
+        >
           Register
         </button>
         <p>
           Already have an account?{" "}
           <Link to="/login">
-            {" "}
             <span onClick={() => onSwitchAuthStep("login")}>Login</span>
           </Link>
         </p>

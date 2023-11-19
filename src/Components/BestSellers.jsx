@@ -28,7 +28,11 @@ const BestSellersCard = ({ imagePath, altText, productName, isLoggedIn }) => {
 
 const BestSellers = ({ isLoggedIn }) => (
   <div className="container mt-4">
-    <h1 className="Categories-title" id="bestsellers">
+    <h1
+      className="Categories-title"
+      id="bestsellers"
+      style={{ color: "orange" }}
+    >
       OUR BESTSELLERS
     </h1>
 
@@ -37,14 +41,14 @@ const BestSellers = ({ isLoggedIn }) => (
       <BestSellersCard
         imagePath={colehaanImage}
         altText="Men Shoes"
-        productName="COLEHAAN-STYLISH BOOTS"
+        productName="COLEHAAN STYLISH BOOTS"
         isLoggedIn={isLoggedIn}
       />
 
       <BestSellersCard
         imagePath={converseImage}
         altText="Women's Shoes"
-        productName="CONVERSE ALL-STAR"
+        productName="CONVERSE-ALLSTAR"
         isLoggedIn={isLoggedIn}
       />
 

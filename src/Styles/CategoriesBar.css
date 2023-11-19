@@ -4,13 +4,22 @@
   font-weight: bold;
   text-align: center;
   padding: 10px;
-  background-color: #f8f9fa; /* Bootstrap light grey background color */
-  border: 1px solid #dee2e6; /* Bootstrap border color */
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
   border-radius: 5px;
   color: rgb(230, 170, 60);
   cursor: pointer;
 }
 
 .text:hover {
-  background-color: #e2e6ea; /* Bootstrap lighter grey background color on hover */
+  background-color: #e2e6ea;
+}
+
+.link-no-underline {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link-no-underline:hover {
+  text-decoration: none;
 }

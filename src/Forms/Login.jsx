@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../FormsStyles/Login.css";
+import "../FormsStyles/Login.css"; // Import your custom styles if needed
 import backendApi from "../BackendServerApi";
 
 const Login = ({ onLogin }) => {
@@ -26,7 +26,7 @@ const Login = ({ onLogin }) => {
       onLogin(token);
 
       // Display success toast
-      // toast.success("Login successful", { position: "top-right" });
+      toast.success("Login successful", { position: "top-right" });
     } catch (error) {
       // Handle error, e.g., display error message
       toast.error("Error logging in. Please try again.", {
@@ -37,37 +37,47 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <form className="auth-form">
-      <label>
-        Email:
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </label>
-      <label>
-        Password:
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </label>
-      <button type="submit" onClick={handleLogin}>
-        Login
-      </button>
-      <p>
-        Create New Account?<Link to="/register">Register</Link>
-      </p>
-      <Link to="/forgotPassword">
-        {" "}
-        <p>Forgot Password?</p>
-      </Link>
+    <div className="container mt-4">
+      <form className="auth-form">
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
+            Email:
+          </label>
+          <input
+            type="email"
+            className="form-control"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
+            Password:
+          </label>
+          <input
+            type="password"
+            className="form-control"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <button type="submit" className="btn btn-primary" onClick={handleLogin}>
+          Login
+        </button>
+        <p>
+          Create New Account?<Link to="/register">Register</Link>
+        </p>
+        <Link to="/forgotPassword">
+          {" "}
+          <p>Forgot Password?</p>
+        </Link>
 
-      {/* Toast Container */}
-      <ToastContainer />
-    </form>
+        {/* Toast Container */}
+        <ToastContainer />
+      </form>
+    </div>
   );
 };
 

@@ -18,16 +18,19 @@ const Contact = () => {
     });
   };
 
-  const formOnClcik = (e) => {
-    e.preventDefault();
-    toast.success("Thanks for submission");
-  };
-  const handleFormSubmit = async (e) => {
+  const formOnClick = async (e) => {
     e.preventDefault();
 
-    // Validate form fields (add your validation logic)
+    // Validate form fields
     if (!formData.name || !formData.email || !formData.message) {
       toast.error("Please fill in all fields.");
+      return;
+    }
+
+    // Additional email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Invalid email address.");
       return;
     }
 
@@ -45,7 +48,9 @@ const Contact = () => {
 
   return (
     <div className="container" id="contact">
-      <h1 className="Categories-title">Contact</h1>
+      <h1 className="Categories-title" style={{ color: "orange" }}>
+        Contact
+      </h1>
       <form
         className="contact-form"
         action="https://formspree.io/f/mleyzorw"
@@ -88,7 +93,7 @@ const Contact = () => {
             placeholder="Leave your comment here"
           />
         </div>
-        <button type="submit" className="btn btn-primary" onClick={formOnClcik}>
+        <button type="submit" className="btn btn-primary" onClick={formOnClick}>
           Submit
         </button>
       </form>

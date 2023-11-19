@@ -6,6 +6,7 @@ import SearchBar from "../Components/SearchBar";
 import FooterContainer from "../Components/FooterContainer";
 import CategoriesBar from "./CategoriesBar";
 import kidsProducts from "../Products/KidsProducts";
+import AboutContainer from "./AboutContainer";
 import backendApi from "../BackendServerApi";
 
 const KidsShoes = ({ handleAddToCart }) => {
@@ -172,11 +173,7 @@ const KidsShoes = ({ handleAddToCart }) => {
 
   return (
     <div className="container mt-4">
-      <h1>Welcome to Comfort Path</h1>
-      <p>
-        Explore our wide range of products and enjoy a comfortable shopping
-        experience.
-      </p>
+      <AboutContainer />
 
       <CategoriesBar />
 

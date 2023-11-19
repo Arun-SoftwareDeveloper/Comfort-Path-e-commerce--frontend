@@ -7,6 +7,7 @@ import FooterContainer from "../Components/FooterContainer";
 import CategoriesBar from "./CategoriesBar";
 import womenProducts from "../Products/WomenProducts";
 import backendApi from "../BackendServerApi";
+import AboutContainer from "./AboutContainer";
 
 const WomenShoesPage = ({ handleAddToCart }) => {
   const [products, setProducts] = useState(womenProducts);
@@ -172,11 +173,7 @@ const WomenShoesPage = ({ handleAddToCart }) => {
 
   return (
     <div className="container mt-4">
-      <h1>Welcome to Comfort Path</h1>
-      <p>
-        Explore our wide range of products and enjoy a comfortable shopping
-        experience.
-      </p>
+      <AboutContainer />
 
       <CategoriesBar />
 

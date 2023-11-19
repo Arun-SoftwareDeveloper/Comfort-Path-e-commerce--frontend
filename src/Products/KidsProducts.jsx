@@ -80,6 +80,72 @@ const kidsProducts = [
       "https://assets.ajio.com/medias/sys_master/root/20230421/2RT5/6442759b907deb497af86634/-473Wx593H-469366771-black-MODEL4.jpg",
     ],
   },
+  {
+    name: "CAMPUS",
+    price: 1200,
+    description:
+      "The shoes has full length air unit and adaptive cushioning technology which resists the shoes to D-shape. ",
+    images: [
+      "https://assets.ajio.com/medias/sys_master/root/20230109/sv7m/63bc0e0ef997dd708ef4b17e/-1117Wx1400H-469294837-red-MODEL.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20230109/Y06I/63bc0d1eaeb269c651ce4037/-1117Wx1400H-469294837-red-MODEL4.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20230109/1l7Y/63bc2dc0f997dd708ef5be00/-1117Wx1400H-469294837-red-MODEL2.jpg",
+    ],
+  },
+  {
+    name: "FEET WELL SHOES",
+    price: 600,
+    description:
+      "Tisya loves her Aretto Leaps! She could walk in them comfortably for long hours. They're not only stylish, but also great for traveling.",
+    images: [
+      "https://assets.ajio.com/medias/sys_master/root/20231105/oGT6/6547c514afa4cf41f57624ad/-1117Wx1400H-466776159-purple-MODEL.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20231105/4XXd/6547c514afa4cf41f57624ea/-1117Wx1400H-466776159-purple-MODEL2.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20231105/heit/6547c514afa4cf41f57624eb/-1117Wx1400H-466776159-purple-MODEL5.jpg",
+    ],
+  },
+  {
+    name: "SKETCHERS",
+    price: 2700,
+    description:
+      "Besides the collection of training and performance shoes, Skechers also has a charming range of yoga-inspired flip flops",
+    images: [
+      "https://assets.ajio.com/medias/sys_master/root/20230412/qdbJ/6436ce86907deb497adc1ba8/-1117Wx1400H-469325297-black-MODEL4.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20230412/odm4/6436c08f907deb497adbbaf0/-1117Wx1400H-469325297-black-MODEL5.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20230412/qdbJ/6436ce86907deb497adc1ba8/-1117Wx1400H-469325297-black-MODEL4.jpg",
+    ],
+  },
+  {
+    name: "NIKE",
+    price: 2500,
+    description:
+      "Stay up-to-date on the latest kids' shoes from Nike. Explore styles made for every activity and level of play.",
+    images: [
+      "https://assets.ajio.com/medias/sys_master/root/20231027/whvV/653ba648afa4cf41f5641f3e/-1117Wx1400H-469544653-red-MODEL4.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20231027/c8Ki/653b9fd0afa4cf41f563fe9a/-1117Wx1400H-469544653-red-MODEL5.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20231027/whvV/653ba648afa4cf41f5641f3e/-1117Wx1400H-469544653-red-MODEL4.jpg",
+    ],
+  },
+  {
+    name: "ADDIDAS KIDS",
+    price: 2300,
+    description:
+      "Adidas has always been at the forefront of sports technology, and its products are designed to help athletes perform at their best.",
+    images: [
+      "https://assets.ajio.com/medias/sys_master/root/20220520/1FJz/62870d2ff997dd03e2f8e8a4/-1117Wx1400H-410261777-ftwrwhite-MODEL.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20220524/CRyW/628bd682f997dd03e217fb47/-1117Wx1400H-410261777-ftwrwhite-MODEL4.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20220519/fag6/628654f0aeb26921afaaaf5e/-1117Wx1400H-410261777-ftwrwhite-MODEL5.jpg",
+    ],
+  },
+  {
+    name: "DISNEY",
+    price: 900,
+    description:
+      "On trend. for sure with Disney kids' accessories including Disney shoes for kids ... Disney Princess Shoes for Girls ",
+    images: [
+      "https://assets.ajio.com/medias/sys_master/root/20230801/69ee/64c93080eebac147fc9e5daf/-1117Wx1400H-450155108-pink-MODEL3.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20230801/Vwce/64c92db8a9b42d15c9835fc4/-1117Wx1400H-450155108-pink-MODEL4.jpg",
+      "https://assets.ajio.com/medias/sys_master/root/20230801/69ee/64c93080eebac147fc9e5daf/-1117Wx1400H-450155108-pink-MODEL3.jpg",
+    ],
+  },
 ];
 
 export default kidsProducts;

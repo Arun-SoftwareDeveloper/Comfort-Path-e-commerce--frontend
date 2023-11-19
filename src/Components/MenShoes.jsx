@@ -7,6 +7,8 @@ import FooterContainer from "../Components/FooterContainer";
 import CategoriesBar from "./CategoriesBar";
 import menProducts from "../Products/MenProducts";
 import backendApi from "../BackendServerApi";
+import AboutContainer from "../Components/AboutContainer";
+import "../Styles/MenShoes.css";
 
 const MenShoes = ({ handleAddToCart }) => {
   const [products, setProducts] = useState(menProducts);
@@ -172,12 +174,7 @@ const MenShoes = ({ handleAddToCart }) => {
 
   return (
     <div className="container mt-4">
-      <h1>Welcome to Comfort Path</h1>
-      <p>
-        Explore our wide range of products and enjoy a comfortable shopping
-        experience.
-      </p>
-
+      <AboutContainer />
       <CategoriesBar />
 
       <SearchBar onSearch={filterProducts} />

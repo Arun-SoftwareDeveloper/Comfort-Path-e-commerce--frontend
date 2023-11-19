@@ -8,7 +8,7 @@ function AboutContainer() {
       <h1 className="text-center">
         Welcome <span style={{ color: "orange" }}>Comfort Path</span>
       </h1>
-      <p>
+      <p className="text-center">
         Explore our wide range of products and enjoy a comfortable shopping
         experience.
       </p>
